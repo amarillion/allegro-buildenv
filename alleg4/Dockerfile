@@ -1,7 +1,6 @@
 FROM ubuntu:xenial
 
-RUN apt-get update
-RUN apt-get -y install cmake \
+RUN apt-get update && apt-get -y install cmake \
 	pkg-config \
 	texinfo \
 	libxext-dev \
@@ -29,33 +28,25 @@ RUN useradd -U -G sudo -p '' -m builder
 ENV ALLEG_VER 4.4.2
 USER builder
 WORKDIR /home/builder
-RUN wget -q http://download.gna.org/allegro/allegro/$ALLEG_VER/allegro-$ALLEG_VER.tar.gz 
-RUN tar -zxf allegro-$ALLEG_VER.tar.gz
+RUN wget -q -O - https://github.com/liballeg/allegro5/releases/download/$ALLEG_VER/allegro-$ALLEG_VER.tar.gz | tar -zx
 
 WORKDIR /home/builder/allegro-$ALLEG_VER
 # Fix a compilation bug
 RUN wget -q -O - https://sourceforge.net/p/alleg/bugs/398/attachment/50_fix_get_value_gcc_5.patch | patch -p1
 
-RUN mkdir -p /home/builder/allegro-$ALLEG_VER/Build/Debug
+RUN bash -c 'mkdir -p /home/builder/allegro-${ALLEG_VER}/Build/{Debug,Release}'
+
 WORKDIR /home/builder/allegro-${ALLEG_VER}/Build/Debug
-RUN cmake -DCMAKE_BUILD_TYPE=Debug ../.. && make
+RUN cmake -DCMAKE_BUILD_TYPE=Debug -DWANT_DOCS=off -DWANT_EXAMPLES=off -DWANT_DEMO=off ../.. && make
 USER root
-RUN make install
+RUN make install && ldconfig
 USER builder
 
-RUN mkdir -p /home/builder/allegro-${ALLEG_VER}/Build/Release
 WORKDIR /home/builder/allegro-${ALLEG_VER}/Build/Release
-RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../.. && make
+RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWANT_DOCS=off -DWANT_EXAMPLES=off -DWANT_DEMO=off ../.. && make
 USER root
-RUN make install
+RUN make install && ldconfig
 USER builder
-
-USER root
-RUN apt-get -y install subversion
-USER builder
-WORKDIR /home/builder
-RUN svn checkout svn://svn.code.sf.net/p/alfont/code/trunk alfont
-WORKDIR /home/builder/alfont
 
 VOLUME /data
 WORKDIR /data
