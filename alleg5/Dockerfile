@@ -33,38 +33,29 @@ RUN useradd -U -G sudo -p '' -m builder
 ENV ALLEG_VER 5.2.2.0
 USER builder
 WORKDIR /home/builder
-RUN git clone https://github.com/liballeg/allegro5.git
-WORKDIR /home/builder/allegro5
-RUN git checkout $ALLEG_VER -b $ALLEG_VER
+RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1
 
-RUN mkdir -p /home/builder/allegro5/Build/Debug
+RUN bash -c 'mkdir -p /home/builder/allegro5/Build/{Debug,Release,Static}'
+
 WORKDIR /home/builder/allegro5/Build/Debug
-RUN cmake -DCMAKE_BUILD_TYPE=Debug ../.. && make
+RUN cmake -DCMAKE_BUILD_TYPE=Debug -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
 USER root
-RUN make install
+RUN make install && ldconfig
 USER builder
 
-RUN mkdir -p /home/builder/allegro5/Build/Release
 WORKDIR /home/builder/allegro5/Build/Release
-RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../.. && make
+RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
 USER root
-RUN make install
+RUN make install && ldconfig
 USER builder
 
-RUN mkdir -p /home/builder/allegro5/Build/Static
 WORKDIR /home/builder/allegro5/Build/Static
-RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWANT_STATIC_RUNTIME=on -DSHARED=off ../.. && make
+RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWANT_STATIC_RUNTIME=on -DSHARED=off -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
 USER root
-RUN make install
+RUN make install && ldconfig
 USER builder
-
-USER root
-RUN ldconfig
-
-RUN apt-get update && apt-get -y install libcurl3-dev
 
 VOLUME /data
 WORKDIR /data
 
 CMD /bin/bash
-
