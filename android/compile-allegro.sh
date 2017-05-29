@@ -1,0 +1,36 @@
+#!/bin/sh
+
+
+# NOTE must define ARCH
+if [ -z $ARCH ]
+then
+	echo "Must define ARCH"
+	exit 1
+fi
+
+export ALLEGRO_SRC=/home/builder/allegro
+export ANDROID_NDK_TOOLCHAIN_ROOT=$HOME/toolchain-$ARCH
+export PKG_CONFIG_LIBDIR=$ANDROID_NDK_TOOLCHAIN_ROOT/lib
+export PATH=$ANDROID_NDK_TOOLCHAIN_ROOT/bin:${PATH}
+
+cd $ALLEGRO_SRC
+
+mkdir -p Build/Android-$ARCH
+cd Build/Android-$ARCH
+
+cmake ../.. -DCMAKE_TOOLCHAIN_FILE=../../cmake/Toolchain-android.cmake \
+	-DARM_TARGETS=$ARCH \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DANDROID_TARGET=android-24 \
+	-DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_TESTS=off -DWANT_DOCS=off \
+	-DPKG_CONFIG_EXECUTABLE=/usr/bin/pkg-config \
+	-DOGG_LIBRARY=$ANDROID_NDK_TOOLCHAIN_ROOT/lib/libogg.a \
+	-DOGG_INCLUDE_DIR=$ANDROID_NDK_TOOLCHAIN_ROOT/include \
+	-DVORBIS_LIBRARY=$ANDROID_NDK_TOOLCHAIN_ROOT/lib/libvorbis.a \
+	-DVORBISFILE_LIBRARY=$ANDROID_NDK_TOOLCHAIN_ROOT/lib/libvorbisfile.a \
+	-DVORBIS_INCLUDE_DIR=$ANDROID_NDK_TOOLCHAIN_ROOT/include \
+	-DSUPPORT_VORBIS=true \
+	-DFREETYPE_LIBRARY=$ANDROID_NDK_TOOLCHAIN_ROOT/lib/libfreetype.a \
+	-DFREETYPE_INCLUDE_DIRS=$ANDROID_NDK_TOOLCHAIN_ROOT/include;$ANDROID_NDK_TOOLCHAIN_ROOT/include/freetype2
+
+make
