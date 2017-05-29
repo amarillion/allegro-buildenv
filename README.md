@@ -28,3 +28,22 @@ Then the command make is run in the current directory. The -u line ensures that 
 
 For a list of publicly available images, see:
 https://hub.docker.com/u/amarillion/
+
+## Overview of images
+
+So far I've prepared the following images:
+
+amarillion/alleg5-buildenv
+* allegro 5, release, debug and static builds
+
+amarillion/alleg5-plus-buildenv
+* same as above, but also includes libcurl-dev and cppunit
+
+amarillion/alleg4-buildenv
+* allegro 4, release and debug builds
+
+amarillion/alleg4-plus-buildenv
+* same as above, but with alfont, dumb and masking add-ons
+
+amarillion/android
+* still WIP - the intention is to prepare all the dependencies needed for compiling allegro for android
