@@ -1,0 +1,40 @@
+Index: Makefile
+===================================================================
+--- Makefile	(revision 12)
++++ Makefile	(working copy)
+@@ -15,7 +15,7 @@
+ 
+ # DJGPP_STATIC
+ ifeq ($(TARGET),DJGPP_STATIC)
+-TARGETFLAGS=-Wall -O2 -march=pentium -fomit-frame-pointer -finline-functions -ffast-math
++TARGETFLAGS=-Wall -O2 -fomit-frame-pointer -finline-functions -ffast-math
+ OBJDIR=obj/djgpp/static
+ LIBDEST=lib/djgpp/libalfont.a
+ endif
+@@ -25,7 +25,7 @@
+ # MINGW32_STATIC
+ ifeq ($(TARGET),MINGW32_STATIC)
+ LFLAGS=-mwindows
+-TARGETFLAGS=-Wall -O2 -march=pentium -fomit-frame-pointer -finline-functions -ffast-math
++TARGETFLAGS=-Wall -O2 -fomit-frame-pointer -finline-functions -ffast-math
+ OBJDIR=obj/mingw32/static
+ LIBDEST=lib/mingw32/libalfont.a
+ INSTALL_PREFIX=$(MINGDIR)
+@@ -35,7 +35,7 @@
+ # MINGW32_DLL
+ ifeq ($(TARGET),MINGW32_DLL)
+ LFLAGS=-mwindows -shared
+-TARGETFLAGS=-Wall -O2 -march=pentium -fomit-frame-pointer -finline-functions -ffast-math
++TARGETFLAGS=-Wall -O2 -fomit-frame-pointer -finline-functions -ffast-math
+ OBJDIR=obj/mingw32/dll
+ LIBIMP=lib/mingw32/libalfontdll.a
+ LIBDEST=lib/mingw32/alfont.dll
+@@ -48,7 +48,7 @@
+ 
+ # LINUX_STATIC
+ ifeq ($(TARGET),LINUX_STATIC)
+-TARGETFLAGS=-Wall -O2 -march=pentium -fomit-frame-pointer -finline-functions -ffast-math
++TARGETFLAGS=-Wall -O2 -fomit-frame-pointer -finline-functions -ffast-math
+ OBJDIR=obj/linux/static
+ LIBDEST=lib/linux/libalfont.a
+ INSTALL_PREFIX=/usr/local
