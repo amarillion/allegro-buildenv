@@ -1,5 +1,7 @@
-FROM ubuntu:xenial
+FROM ubuntu:focal
 
+# https://askubuntu.com/questions/909277/avoiding-user-interaction-with-tzdata
+ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update && apt-get -y install cmake \
 	pkg-config \
 	texinfo \
@@ -30,7 +32,7 @@ RUN apt-get update && apt-get -y install cmake \
 
 RUN useradd -U -G sudo -p '' -m builder
 
-ENV ALLEG_VER 5.2.3.0
+ENV ALLEG_VER 5.2.6.0
 USER builder
 WORKDIR /home/builder
 RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1

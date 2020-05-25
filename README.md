@@ -37,7 +37,7 @@ amarillion/alleg5-buildenv
 * allegro 5, release, debug and static builds
 
 amarillion/alleg5-plus-buildenv
-* same as above, but also includes libcurl-dev and cppunit
+* same as above, but also includes libcurl-dev, cppunit, and inkscape (for automated conversion of svg images)
 
 amarillion/alleg4-buildenv
 * allegro 4, release and debug builds
