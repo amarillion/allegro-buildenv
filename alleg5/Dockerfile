@@ -23,7 +23,7 @@ RUN apt-get update && apt-get -y install cmake \
 	libphysfs-dev libfreetype6-dev \
 	libgtk2.0-dev libdumb1-dev libpulse-dev pandoc \
 	libjpeg-dev libopenal-dev libasound-dev libflac-dev libtheora-dev \
-	libfreeimage-dev libwebp-dev libopus-dev libopusfile-dev \
+	libfreeimage-dev libwebp-dev libopus-dev libopusfile-dev libgtk-3-dev \
 	wget \
 	make \
 	gcc \
