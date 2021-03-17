@@ -34,7 +34,7 @@ https://hub.docker.com/u/amarillion/
 So far I've prepared the following images:
 
 amarillion/alleg5-buildenv
-* allegro 5, release, debug and static builds
+* allegro 5, release, monolith, debug and static builds
 
 amarillion/alleg5-plus-buildenv
 * same as above, but also includes libcurl-dev, cppunit, and inkscape (for automated conversion of svg images)

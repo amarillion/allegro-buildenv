@@ -23,6 +23,7 @@ RUN apt-get update && apt-get -y install cmake \
 	libphysfs-dev libfreetype6-dev \
 	libgtk2.0-dev libdumb1-dev libpulse-dev pandoc \
 	libjpeg-dev libopenal-dev libasound-dev libflac-dev libtheora-dev \
+	libfreeimage-dev libwebp-dev libopus-dev libopusfile-dev \
 	wget \
 	make \
 	gcc \
@@ -32,12 +33,12 @@ RUN apt-get update && apt-get -y install cmake \
 
 RUN useradd -U -G sudo -p '' -m builder
 
-ENV ALLEG_VER 5.2.6.0
+ENV ALLEG_VER 5.2.7.0
 USER builder
 WORKDIR /home/builder
 RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1
 
-RUN bash -c 'mkdir -p /home/builder/allegro5/Build/{Debug,Release,Static}'
+RUN bash -c 'mkdir -p /home/builder/allegro5/Build/{Debug,Release,Monolith,Static}'
 
 WORKDIR /home/builder/allegro5/Build/Debug
 RUN cmake -DCMAKE_BUILD_TYPE=Debug -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
@@ -47,6 +48,12 @@ USER builder
 
 WORKDIR /home/builder/allegro5/Build/Release
 RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
+USER root
+RUN make install && ldconfig
+USER builder
+
+WORKDIR /home/builder/allegro5/Build/Monolith
+RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWANT_MONOLITH=on -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
 USER root
 RUN make install && ldconfig
 USER builder
