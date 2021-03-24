@@ -47,3 +47,9 @@ amarillion/alleg4-plus-buildenv
 
 amarillion/android
 * still WIP - the intention is to prepare all the dependencies needed for compiling allegro for android
+
+## See also
+
+Discussion threads on allegro.cc: 
+* https://www.allegro.cc/forums/thread/616906
+* https://www.allegro.cc/forums/thread/617543

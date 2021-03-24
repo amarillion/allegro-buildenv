@@ -3,31 +3,15 @@ FROM ubuntu:focal
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y install \
 	cmake \
-	# pkg-config \
-
-	# Needed for i686-w64-mingw32-pkg-config 
-	mingw-w64-tools dpkg-dev \
 	wget \
-	# make \
-	# gcc \
-	# g++ \
 	git \
 	sudo \
-	mingw-w64
-
-#	texinfo \
-#	libxext-dev \
-#	libx11-dev \
-#	libxpm-dev \
-#	libxt-dev \
-#	libxcursor-dev \
-#	libasound2-dev \
-#	oss4-dev \
-#	libxxf86dga-dev \
-#	libxxf86vm-dev \
-#	libgl1-mesa-dev \
-#	libglu1-mesa-dev \
-
+	# To save space, we only install the 32-bit i686 packages
+	# This saves ~500s Mbs in the final docker image.
+	# Alternatively, get mingw-w64 (both 32-bit and 64-bit)
+	# or choose the -x86-64 or -i686 packages
+	gcc-mingw-w64-i686 \
+	g++-mingw-w64-i686
 
 RUN useradd -U -G sudo -p '' -m builder
 
@@ -100,6 +84,9 @@ RUN cmake \
 USER root
 RUN make install && ldconfig
 USER builder
+
+# Clean up intermediate build files to save size
+# RUN bash -c 'rm -r /home/builder/allegro5/Build/{MingwDebug,MingwRelease,MingwMonolith}'
 
 VOLUME /data
 WORKDIR /data
