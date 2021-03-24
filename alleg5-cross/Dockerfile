@@ -2,6 +2,7 @@ FROM ubuntu:focal
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y install \
+	pkg-config \
 	cmake \
 	wget \
 	git \
@@ -90,5 +91,8 @@ USER builder
 
 VOLUME /data
 WORKDIR /data
+
+# This is where pkg-config will .pc files for allegro and other deps.
+ENV PKG_CONFIG_LIBDIR=/usr/i686-w64-mingw32/lib/pkgconfig
 
 CMD /bin/bash
