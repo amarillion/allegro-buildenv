@@ -2,67 +2,59 @@ FROM ubuntu:focal
 
 # https://askubuntu.com/questions/909277/avoiding-user-interaction-with-tzdata
 ENV DEBIAN_FRONTEND=noninteractive 
-RUN apt-get update && apt-get -y install cmake \
-	pkg-config \
-	texinfo \
-	libxext-dev \
-	libx11-dev \
-	libxpm-dev \
-	libxt-dev \
-	libxcursor-dev \
+RUN apt-get update && apt-get -y install \
+	cmake \
+	g++ \
+	gcc \
+	git \
+	libasound-dev \
 	libasound2-dev \
-	oss4-dev \
-	libxxf86dga-dev \
-	libxxf86vm-dev \
+	libdumb1-dev \
+	libflac-dev \
+	libfreeimage-dev \
+	libfreetype6-dev \
 	libgl1-mesa-dev \
 	libglu1-mesa-dev \
-	libpng-dev \
-	zlib1g-dev \
-	libvorbis-dev \
+	libgtk-3-dev \
+	libjpeg-dev \
 	libogg-dev \
-	libphysfs-dev libfreetype6-dev \
-	libgtk2.0-dev libdumb1-dev libpulse-dev pandoc \
-	libjpeg-dev libopenal-dev libasound-dev libflac-dev libtheora-dev \
-	libfreeimage-dev libwebp-dev libopus-dev libopusfile-dev libgtk-3-dev \
-	wget \
+	libopenal-dev \
+	libopus-dev \
+	libopusfile-dev \
+	libphysfs-dev \
+	libpng-dev \
+	libpulse-dev \
+	libtheora-dev \
+	libvorbis-dev \
+	libwebp-dev \
+	libx11-dev \
+	libxcursor-dev \
+	libxext-dev \
+	libxpm-dev \
+	libxt-dev \
+	libxxf86dga-dev \
+	libxxf86vm-dev \
 	make \
-	gcc \
-	g++ \
-	git \
-	sudo
+	oss4-dev \
+	pkg-config \
+	sudo \
+	zlib1g-dev \
+	&& rm -rf /var/lib/apt/lists/*
 
 RUN useradd -U -G sudo -p '' -m builder
 
 ENV ALLEG_VER 5.2.7.0
 USER builder
 WORKDIR /home/builder
-RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1
 
-RUN bash -c 'mkdir -p /home/builder/allegro5/Build/{Debug,Release,Monolith,Static}'
+COPY scripts /home/builder
 
-WORKDIR /home/builder/allegro5/Build/Debug
-RUN cmake -DCMAKE_BUILD_TYPE=Debug -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
-USER root
-RUN make install && ldconfig
-USER builder
-
-WORKDIR /home/builder/allegro5/Build/Release
-RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
-USER root
-RUN make install && ldconfig
-USER builder
-
-WORKDIR /home/builder/allegro5/Build/Monolith
-RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWANT_MONOLITH=on -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
-USER root
-RUN make install && ldconfig
-USER builder
-
-WORKDIR /home/builder/allegro5/Build/Static
-RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWANT_STATIC_RUNTIME=on -DSHARED=off -DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off ../.. && make
-USER root
-RUN make install && ldconfig
-USER builder
+RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1 && \
+	./build-alleg5-debug.sh && \
+	./build-alleg5-release.sh && \
+	./build-alleg5-monolith.sh && \
+	./build-alleg5-static.sh && \
+	rm -rf /home/builder/allegro5
 
 VOLUME /data
 WORKDIR /data
