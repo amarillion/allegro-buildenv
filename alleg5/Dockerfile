@@ -49,11 +49,13 @@ WORKDIR /home/builder
 
 COPY scripts /home/builder
 
-RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1 && \
-	./build-alleg5-debug.sh && \
-	./build-alleg5-release.sh && \
-	./build-alleg5-monolith.sh && \
-	./build-alleg5-static.sh && \
+RUN ./install-minimp3.sh && \
+	git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1 && \
+	cd allegro5 && \
+	~/build-alleg5-debug.sh && \
+	~/build-alleg5-release.sh && \
+	~/build-alleg5-monolith.sh && \
+	~/build-alleg5-static.sh && \
 	rm -rf /home/builder/allegro5
 
 VOLUME /data
