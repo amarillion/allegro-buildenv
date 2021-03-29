@@ -9,4 +9,5 @@ build:
 
 push:
 	docker login
-	docker push ${IMAGE}
+	docker push ${IMAGE}:${VERSION}${SUFFIX}
+	docker push ${IMAGE}:latest${SUFFIX}

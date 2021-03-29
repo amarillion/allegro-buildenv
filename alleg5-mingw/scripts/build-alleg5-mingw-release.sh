@@ -7,7 +7,6 @@ cmake \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DFREETYPE_PNG=on \
 	-DFREETYPE_ZLIB=on \
-	-DCMAKE_BUILD_TYPE=Debug \
 	-DWANT_DEMO=off -DWANT_EXAMPLES=off -DWANT_DOCS=off \
 	../..
 make

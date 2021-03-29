@@ -59,7 +59,8 @@ RUN ./build-flac.sh
 
 COPY scripts/build-alleg5-mingw*.sh /home/builder/
 
-RUN ./build-alleg5-mingw-monolith.sh && \
+RUN \
+	./build-alleg5-mingw-monolith.sh && \
 	./build-alleg5-mingw-release.sh && \
 	./build-alleg5-mingw-debug.sh && \
 # TODO: Static config leads to error
