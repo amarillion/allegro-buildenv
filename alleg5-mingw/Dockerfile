@@ -15,13 +15,12 @@ RUN apt-get update && apt-get -y install \
 	g++-mingw-w64-i686 \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN useradd -U -G sudo -p '' -m builder
+RUN useradd -U -G sudo -p '' -m builder && \
+	mkdir -p /opt/source && \
+	chown builder /opt/source/
 
 ENV ALLEG_VER 5.2.7.0
 USER builder
-WORKDIR /home/builder
-
-RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1
 
 COPY scripts/build-zlib.sh \
 	scripts/build-png.sh \
@@ -31,19 +30,21 @@ COPY scripts/build-zlib.sh \
 	scripts/build-dumb.sh \
 	scripts/Toolchain-mingw.cmake \
 	scripts/install-minimp3.sh \
-	/home/builder/
+	scripts/build-flac.sh \
+	/opt/source/
 
-RUN ./build-zlib.sh && \
+RUN cd /opt/source && \
+	git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1 && \
+	./build-zlib.sh && \
 	./build-png.sh && \
 	./build-freetype.sh && \
 	./build-ogg.sh && \
 	./build-vorbis.sh && \
 	./build-dumb.sh && \
-	./install-minimp3.sh
+	./install-minimp3.sh && \
+	./build-flac.sh
 
-COPY scripts/build-theora.sh scripts/build-flac.sh /home/builder/
-
-RUN ./build-flac.sh
+COPY scripts/build-theora.sh /opt/source/
 
 # TODO: script broken still...
 # Theora - for video support
@@ -54,19 +55,14 @@ RUN ./build-flac.sh
 # Opus
 # physFS
 
-# Non-allegro...
-# libcurl
+COPY scripts/build-alleg5-mingw*.sh /opt/source/
 
-COPY scripts/build-alleg5-mingw*.sh /home/builder/
-
-RUN \
-	./build-alleg5-mingw-monolith.sh && \
-	./build-alleg5-mingw-release.sh && \
-	./build-alleg5-mingw-debug.sh && \
-# TODO: Static config leads to error
-#	./build-alleg5-mingw-static.sh && \
-# Clean up intermediate build files
-	rm -rf /home/builder/allegro5/Build
+RUN cd /opt/source/allegro5 && \
+	/opt/source/build-alleg5-mingw-monolith.sh && \
+	/opt/source/build-alleg5-mingw-release.sh && \
+	/opt/source/build-alleg5-mingw-debug.sh && \
+	/opt/source/build-alleg5-mingw-static.sh && \
+	rm -rf /opt/source/allegro5/Build
 
 VOLUME /data
 WORKDIR /data

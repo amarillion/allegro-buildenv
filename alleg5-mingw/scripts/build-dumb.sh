@@ -9,7 +9,7 @@ cd dumb*
 mkdir -p build/release
 cd build/release
 cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-	-DCMAKE_TOOLCHAIN_FILE=/home/builder/Toolchain-mingw.cmake \
+	-DCMAKE_TOOLCHAIN_FILE=/opt/source/Toolchain-mingw.cmake \
 	-DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32 \
 	-DBUILD_SHARED_LIBS:BOOL=OFF \
 	-DBUILD_EXAMPLES:BOOL=OFF \

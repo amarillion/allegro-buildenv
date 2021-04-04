@@ -1,7 +1,10 @@
 #!/bin/bash -e
 
-mkdir -p /home/builder/allegro5/Build/MingwDebug
-cd /home/builder/allegro5/Build/MingwDebug
+# Check that we're in the right place
+test -e src/allegro.c || (echo "Not correct allegro folder"; exit 1)
+
+mkdir -p Build/MingwDebug
+cd Build/MingwDebug
 cmake \
 	-DCMAKE_TOOLCHAIN_FILE=../../cmake/Toolchain-mingw.cmake \
 	-DCMAKE_BUILD_TYPE=Debug \
@@ -12,3 +15,4 @@ cmake \
 make
 sudo make install
 sudo ldconfig
+cd ../..
