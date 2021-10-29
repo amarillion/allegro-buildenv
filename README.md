@@ -2,7 +2,7 @@
 
 The aim of this project is to provide a collection of docker images as basis for setup and compilation of allegro projects.
 
-Documentation about Docker: https://docs.docker.com/
+Docker documentation: https://docs.docker.com/
 
 ## Set up Docker
 
@@ -56,8 +56,14 @@ amarillion/alleg4-plus-buildenv
 amarillion/android
 * still WIP - the intention is to prepare all the dependencies needed for compiling allegro for android
 
+## Example
+
+Here is a working example:
+https://github.com/amarillion/allegro-buildenv-example
+
 ## See also
 
 Discussion threads on allegro.cc: 
 * https://www.allegro.cc/forums/thread/616906
 * https://www.allegro.cc/forums/thread/617543
+* https://www.allegro.cc/forums/thread/618390
