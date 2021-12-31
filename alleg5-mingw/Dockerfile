@@ -31,6 +31,7 @@ COPY scripts/build-zlib.sh \
 	scripts/Toolchain-mingw.cmake \
 	scripts/install-minimp3.sh \
 	scripts/build-flac.sh \
+	scripts/build-physfs.sh \
 	/opt/source/
 
 RUN cd /opt/source && \
@@ -42,7 +43,8 @@ RUN cd /opt/source && \
 	./build-vorbis.sh && \
 	./build-dumb.sh && \
 	./install-minimp3.sh && \
-	./build-flac.sh
+	./build-flac.sh && \
+	./build-physfs.sh
 
 COPY scripts/build-theora.sh /opt/source/
 
