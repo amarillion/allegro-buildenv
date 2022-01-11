@@ -13,11 +13,13 @@ USER builder
 COPY scripts /opt/source/
 
 RUN cd /opt/source && \
+  ./build-cppunit.sh
+
+RUN cd /opt/source && \
   ./build-openssl.sh
 
 RUN cd /opt/source && \
   ./build-curl.sh
 
-# TODO: libcppunit-dev?
 WORKDIR /data
 CMD /bin/bash
