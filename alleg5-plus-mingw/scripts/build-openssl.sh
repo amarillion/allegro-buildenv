@@ -16,4 +16,8 @@ CROSS_COMPILE="i686-w64-mingw32-" \
 make depend
 make
 sudo make install
+
+# Remove intermediate files
+make clean
+
 cd ..

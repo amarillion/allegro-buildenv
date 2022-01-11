@@ -25,4 +25,8 @@ cd curl*
 
 make
 sudo make install
+
+# Remove intermediate files
+make clean
+
 cd ..

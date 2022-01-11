@@ -13,12 +13,8 @@ USER builder
 COPY scripts /opt/source/
 
 RUN cd /opt/source && \
-  ./build-cppunit.sh
-
-RUN cd /opt/source && \
-  ./build-openssl.sh
-
-RUN cd /opt/source && \
+  ./build-cppunit.sh && \
+  ./build-openssl.sh && \
   ./build-curl.sh
 
 WORKDIR /data

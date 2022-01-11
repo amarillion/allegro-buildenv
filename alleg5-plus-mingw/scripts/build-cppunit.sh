@@ -9,4 +9,8 @@ pushd cppunit*
     LDFLAGS="-L/usr/i686-w64-mingw32/lib"
 make
 sudo make install
+
+# Remove intermediate files
+make clean
+
 popd
