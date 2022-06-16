@@ -45,7 +45,7 @@ amarillion/alleg5-plus-buildenv
 amarillion/alleg5-dallegro
 * only linux variant available at the moment.
 * Based on amarillion/alleg5-buildenv
-* Includes dmd compiler and SiegeLord's D extension
+* Includes dmd compiler and SiegeLord's DAllegro extension
 
 amarillion/alleg4-buildenv
 * allegro 4, release and debug builds
