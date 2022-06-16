@@ -34,13 +34,13 @@ https://hub.docker.com/u/amarillion/
 So far I've prepared the following images:
 
 amarillion/alleg5-buildenv
-* 5.2.7.0-linux latest-linux: For linux: allegro 5, release, monolith, debug and static builds
-* 5.2.7.0-mingw-64-i686, latest-mingw-64-i686: Cross-build environment for windows (32 bit).
+* 5.2.8.0-linux latest-linux: For linux: allegro 5, release, monolith, debug and static builds
+* 5.2.8.0-mingw-64-i686, latest-mingw-64-i686: Cross-build environment for windows (32 bit).
 
 amarillion/alleg5-plus-buildenv
 * same as above, but also includes libcurl-dev, cppunit, and inkscape (for automated conversion of svg images)
-* 5.2.7.0-linux latest-linux
-* 5.2.7.0-mingw-64-i686, latest-mingw-64-i686
+* 5.2.8.0-linux latest-linux
+* 5.2.8.0-mingw-64-i686, latest-mingw-64-i686
 
 amarillion/alleg5-dallegro
 * only linux variant available at the moment.

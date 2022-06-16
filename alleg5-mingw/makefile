@@ -1,6 +1,6 @@
 
 IMAGE=amarillion/alleg5-buildenv
-VERSION=5.2.7.0
+VERSION=5.2.8.0
 SUFFIX=-mingw-w64-i686
 
 build:

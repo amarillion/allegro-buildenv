@@ -1,6 +1,6 @@
 
 IMAGE=amarillion/alleg5-dallegro
-VERSION=5.2.7.0
+VERSION=5.2.8.0
 
 build:
 	docker build -t ${IMAGE}:${VERSION} .

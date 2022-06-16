@@ -19,7 +19,7 @@ RUN useradd -U -G sudo -p '' -m builder && \
 	mkdir -p /opt/source && \
 	chown builder /opt/source/
 
-ENV ALLEG_VER 5.2.7.0
+ENV ALLEG_VER 5.2.8.0
 USER builder
 
 COPY scripts/build-zlib.sh \

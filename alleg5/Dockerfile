@@ -43,7 +43,7 @@ RUN apt-get update && apt-get -y install \
 
 RUN useradd -U -G sudo -p '' -m builder
 
-ENV ALLEG_VER 5.2.7.0
+ENV ALLEG_VER 5.2.8.0
 USER builder
 WORKDIR /home/builder
 
