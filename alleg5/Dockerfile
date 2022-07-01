@@ -47,11 +47,13 @@ ENV ALLEG_VER 5.2.8.0
 USER builder
 WORKDIR /home/builder
 
-COPY scripts /home/builder
+# commit-d25c4cf.patch is a backported build fix for Allegro 5.2.8.0
+COPY commit-d25c4cf.patch scripts /home/builder/
 
 RUN ./install-minimp3.sh && \
 	git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1 && \
 	cd allegro5 && \
+	patch -p1 < ~/commit-d25c4cf.patch && \
 	~/build-alleg5-debug.sh && \
 	~/build-alleg5-release.sh && \
 	~/build-alleg5-monolith.sh && \
