@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:jammy
 
 RUN apt-get update && apt-get -y install cmake \
 	pkg-config \
@@ -21,19 +21,17 @@ RUN apt-get update && apt-get -y install cmake \
 	make \
 	gcc \
 	g++ \
-	sudo
+	sudo \
+	&& rm -rf /var/lib/apt/lists/*
 
 RUN useradd -U -G sudo -p '' -m builder
 
-ENV ALLEG_VER 4.4.2
+ENV ALLEG_VER 4.4.3.1
 USER builder
 WORKDIR /home/builder
 RUN wget -q -O - https://github.com/liballeg/allegro5/releases/download/$ALLEG_VER/allegro-$ALLEG_VER.tar.gz | tar -zx
 
 WORKDIR /home/builder/allegro-$ALLEG_VER
-# Fix a compilation bug
-RUN wget -q -O - https://sourceforge.net/p/alleg/bugs/398/attachment/50_fix_get_value_gcc_5.patch | patch -p1
-
 RUN bash -c 'mkdir -p /home/builder/allegro-${ALLEG_VER}/Build/{Debug,Release}'
 
 WORKDIR /home/builder/allegro-${ALLEG_VER}/Build/Debug
