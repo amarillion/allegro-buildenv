@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y install \
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y install \
 	# or choose the -x86-64 or -i686 packages
 	gcc-mingw-w64-i686 \
 	g++-mingw-w64-i686 \
-	&& rm -rf /var/lib/apt/lists/*
+	&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -U -G sudo -p '' -m builder && \
 	mkdir -p /opt/source && \
@@ -58,8 +58,10 @@ COPY scripts/build-theora.sh /opt/source/
 # physFS
 
 COPY scripts/build-alleg5-mingw*.sh /opt/source/
+COPY commit-d25c4cf.patch /opt/source
 
 RUN cd /opt/source/allegro5 && \
+	patch -p1 < /opt/source/commit-d25c4cf.patch && \
 	/opt/source/build-alleg5-mingw-monolith.sh && \
 	/opt/source/build-alleg5-mingw-release.sh && \
 	/opt/source/build-alleg5-mingw-debug.sh && \

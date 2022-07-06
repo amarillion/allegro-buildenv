@@ -2,7 +2,7 @@
 
 # Adapted from openTTD cross-compilation instructions (just changed '/usr/local' to '/usr', and bumped version from 2.8 to 2.10):
 # https://wiki.openttd.org/en/Archive/Compilation and Ports/Cross-compiling for Windows
-wget http://downloads.sourceforge.net/project/freetype/freetype2/2.10.1/freetype-2.10.1.tar.gz -O- | tar xfz -
+wget http://downloads.sourceforge.net/project/freetype/freetype2/2.12.1/freetype-2.12.1.tar.gz -O- | tar xfz -
 cd freetype*
 ./configure \
     --host=i686-w64-mingw32 \
