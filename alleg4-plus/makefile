@@ -9,6 +9,7 @@ build:
 
 push:
 	docker login
+	docker push ${IMAGE}
 	docker push ${IMAGE}:${VERSION}${SUFFIX}
 
 shell:
