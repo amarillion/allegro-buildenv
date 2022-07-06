@@ -3,7 +3,7 @@
 
 # Adapted from complete instructions here: https://github.com/curl/curl/issues/1492
 
-wget https://curl.haxx.se/download/curl-7.75.0.tar.gz -O- | tar xfz -
+wget https://curl.haxx.se/download/curl-7.84.0.tar.gz -O- | tar xfz -
 cd curl*
 ./configure \
     --disable-shared \

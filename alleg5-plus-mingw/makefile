@@ -12,5 +12,5 @@ push:
 	docker push ${IMAGE}:${VERSION}${SUFFIX}
 	docker push ${IMAGE}:latest${SUFFIX}
 
-sh:
-	docker run -ti ${IMAGE}:latest${SUFFIX} bash
+shell:
+	docker run -ti ${IMAGE}:latest${SUFFIX}

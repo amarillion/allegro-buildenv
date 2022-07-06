@@ -4,7 +4,7 @@
 # Adapted from complete instructions here: https://github.com/curl/curl/issues/1492
 
 wget https://www.openssl.org/source/openssl-1.0.2k.tar.gz -O- | tar xfz -
-cd openssl-1.0.2k/
+cd openssl-*/
 
 # Alternative to setting CC: define CROSS_COMPILE, which prefixes each build tool:
 CROSS_COMPILE="i686-w64-mingw32-" \
