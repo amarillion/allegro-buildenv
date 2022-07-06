@@ -1,10 +1,9 @@
 #!/bin/bash -e
 
-wget https://github.com/icculus/physfs/archive/refs/tags/release-3.0.2.tar.gz -O- | tar xfz -
-pushd physfs*
+cd /opt/source/physfs*
 
 mkdir -p build/release
-pushd build/release
+cd build/release
 
 cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DCMAKE_TOOLCHAIN_FILE=/opt/source/Toolchain-mingw.cmake \
@@ -14,5 +13,3 @@ cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 make
 sudo make install
 sudo ldconfig
-popd
-popd

@@ -1,11 +1,10 @@
 #!/bin/bash -e
 
-git clone https://github.com/kode54/dumb.git --depth 1
-
+# git clone https://github.com/kode54/dumb.git --depth 1
 # Alternative for specific version:
 # wget https://github.com/kode54/dumb/archive/refs/tags/2.0.3.tar.gz -O- | tar xfz -
 
-cd dumb*
+cd /opt/source/dumb*
 mkdir -p build/release
 cd build/release
 cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \

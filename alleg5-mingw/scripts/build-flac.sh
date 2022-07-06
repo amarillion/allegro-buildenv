@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
-wget https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.4.tar.xz -O- | tar xfJ -
-cd flac*
+cd /opt/source/flac*
 ./configure \
     --host=i686-w64-mingw32 \
     --prefix=/usr/i686-w64-mingw32 \

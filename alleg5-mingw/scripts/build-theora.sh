@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
-wget http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2 -O- | tar xfj -
-cd libtheora*
+cd /opt/source/libtheora*
 ./configure \
     --host=i686-w64-mingw32 \
     --prefix=/usr/i686-w64-mingw32 \

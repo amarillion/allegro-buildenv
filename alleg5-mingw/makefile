@@ -14,3 +14,6 @@ push:
 
 shell:
 	docker run -ti ${IMAGE}:latest${SUFFIX} bash
+
+dive:
+	dive ${IMAGE}:latest${SUFFIX}
