@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 # https://askubuntu.com/questions/909277/avoiding-user-interaction-with-tzdata
 ENV DEBIAN_FRONTEND=noninteractive 
