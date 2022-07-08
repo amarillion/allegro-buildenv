@@ -17,3 +17,5 @@ cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 make
 sudo make install
 sudo ldconfig
+cd ../..
+rm -r build

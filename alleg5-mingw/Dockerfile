@@ -20,11 +20,11 @@ RUN wget http://downloads.sourceforge.net/project/libpng/libpng16/1.6.37/libpng-
 RUN wget http://downloads.sourceforge.net/project/freetype/freetype2/2.12.1/freetype-2.12.1.tar.gz -O- | tar xfz -
 RUN wget https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.gz -O- | tar xfz -
 RUN wget https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.gz -O- | tar xfz -
-RUN git clone https://github.com/kode54/dumb.git --depth 1
+RUN git clone https://github.com/kode54/dumb.git --depth 1 && rm -rf dumb/.git
 RUN wget https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.4.tar.xz -O- | tar xfJ -
-RUN git clone https://github.com/lieff/minimp3.git --depth 1
+RUN git clone https://github.com/lieff/minimp3.git --depth 1 && rm -rf minimp3/.git
 RUN wget https://github.com/icculus/physfs/archive/refs/tags/release-3.0.2.tar.gz -O- | tar xfz -
-RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1
+RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --depth 1 && rm -rf allegro5/.git
 
 # All downloads complete. Start second stage.
 FROM ubuntu:jammy

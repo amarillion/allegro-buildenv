@@ -8,4 +8,4 @@ cd /opt/source/flac*
     LDFLAGS="-L/usr/i686-w64-mingw32/lib"
 make
 sudo make install
-cd ..
+# TODO clean

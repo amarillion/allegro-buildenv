@@ -10,3 +10,4 @@ cd /opt/source/l*png*
     LDFLAGS="-L/usr/i686-w64-mingw32/lib"
 make
 sudo make install
+make clean

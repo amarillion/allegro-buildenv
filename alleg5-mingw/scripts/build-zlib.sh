@@ -10,5 +10,5 @@ sudo BINARY_PATH=/usr/i686-w64-mingw32/bin \
     INCLUDE_PATH=/usr/i686-w64-mingw32/include \
     LIBRARY_PATH=/usr/i686-w64-mingw32/lib \
     make -f win32/Makefile.gcc install
-
+# TODO: clean
 

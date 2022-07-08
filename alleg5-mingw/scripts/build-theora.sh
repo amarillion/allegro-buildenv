@@ -8,7 +8,7 @@ cd /opt/source/libtheora*
     LDFLAGS="-L/usr/i686-w64-mingw32/lib"
 make
 sudo make install
-cd ..
+make clean
 
 # TODO: ERRORS out with
 # echo EXPORTS > .libs/libtheoradec-1.dll.def; cat .libs/libtheoradec.def >> .libs/libtheoradec-1.dll.def; fi

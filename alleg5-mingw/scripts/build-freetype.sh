@@ -12,4 +12,5 @@ cd /opt/source/freetype*
     PKG_CONFIG_LIBDIR=/usr/i686-w64-mingw32/lib/pkgconfig
 make
 sudo make install
+make clean
 # Now freetype will be installed in /usr/i686-w64-mingw32 
