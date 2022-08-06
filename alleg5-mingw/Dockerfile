@@ -78,6 +78,7 @@ RUN cd /opt/source/allegro5 && \
 	/opt/source/build-alleg5-mingw-monolith.sh && \
 	/opt/source/build-alleg5-mingw-release.sh && \
 	/opt/source/build-alleg5-mingw-debug.sh && \
+	/opt/source/build-alleg5-mingw-debug-monolith.sh && \
 	/opt/source/build-alleg5-mingw-static.sh && \
 	rm -rf /opt/source/allegro5/Build
 
