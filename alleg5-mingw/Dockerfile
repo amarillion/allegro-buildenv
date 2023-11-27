@@ -12,7 +12,7 @@ RUN useradd -U -G sudo -p '' -m builder && \
 	chown builder /opt/source/
 
 # Fetch everything in /opt/sources
-ENV ALLEG_VER 5.2.8.0
+ENV ALLEG_VER 5.2.9.0
 USER builder
 WORKDIR /opt/source
 RUN wget http://zlib.net/zlib-1.2.12.tar.gz -O- | tar xfz -
@@ -30,7 +30,7 @@ RUN git clone https://github.com/liballeg/allegro5.git --branch $ALLEG_VER --dep
 FROM ubuntu:jammy
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV ALLEG_VER 5.2.8.0
+ENV ALLEG_VER 5.2.9.0
 
 RUN useradd -U -G sudo -p '' -m builder && \
 	apt-get update && apt-get -y install \
@@ -50,7 +50,7 @@ COPY --from=0 /opt/ /opt/
 
 USER builder
 
-COPY commit-d25c4cf.patch scripts/* /opt/source/
+COPY scripts/* /opt/source/
 
 RUN /opt/source/build-zlib.sh && \
  /opt/source/build-png.sh && \
@@ -74,7 +74,6 @@ RUN /opt/source/build-zlib.sh && \
 # # physFS
 
 RUN cd /opt/source/allegro5 && \
-	patch -p1 < /opt/source/commit-d25c4cf.patch && \
 	/opt/source/build-alleg5-mingw-monolith.sh && \
 	/opt/source/build-alleg5-mingw-release.sh && \
 	/opt/source/build-alleg5-mingw-debug.sh && \

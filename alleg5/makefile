@@ -1,6 +1,6 @@
 
 IMAGE=amarillion/alleg5-buildenv
-VERSION=5.2.8.0
+VERSION=5.2.9.0
 SUFFIX=-linux
 
 build:
