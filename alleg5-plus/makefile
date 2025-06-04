@@ -1,6 +1,6 @@
 
 IMAGE=amarillion/alleg5-plus-buildenv
-VERSION=5.2.9.0
+VERSION=5.2.10.1
 
 build:
 	docker build -t ${IMAGE}:${VERSION} .

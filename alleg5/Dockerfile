@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
 # https://askubuntu.com/questions/909277/avoiding-user-interaction-with-tzdata
 ENV DEBIAN_FRONTEND=noninteractive 
@@ -43,7 +43,7 @@ RUN apt-get update && apt-get -y install \
 
 RUN useradd -U -G sudo -p '' -m builder
 
-ENV ALLEG_VER 5.2.9.0
+ENV ALLEG_VER 5.2.10.1
 USER builder
 WORKDIR /home/builder
 
